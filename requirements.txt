@@ -1,0 +1,5 @@
+Flask>=3.0.0
+pymupdf>=2.1.0
+pypdf>=5.0.0
+requests>=2.31.0
+werkzeug>=3.0.0

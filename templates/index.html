@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-banner">
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8">
+                <div class="d-inline-flex align-items-center gap-2 mb-3">
+                    <span class="badge bg-danger bg-opacity-75 text-white px-3 py-2 rounded-pill">
+                        <i class="bi bi-shield-exclamation me-1"></i> AI-Powered Recruitment Safety
+                    </span>
+                    <span class="badge bg-light text-dark px-3 py-2 rounded-pill">
+                        Hackathon Project Pitch
+                    </span>
+                </div>
+                <h1 class="hero-title mb-3">
+                    JobShield <span class="text-info">AI</span>
+                </h1>
+                <p class="h4 fw-light text-light mb-3">
+                    Smart Internship & Job Risk Assessment Engine
+                </p>
+                <p class="hero-subtitle mb-4">
+                    Students struggle to distinguish genuine recruitment opportunities from deceptive offers. JobShield AI analyzes offer letters, identifies suspicious payment demands and vague promises, and provides an explainable verification checklist.
+                </p>
+
+                <!-- Responsible Use Banner from Pitch Slide 1 -->
+                <div class="responsible-use-alert d-flex align-items-center gap-3">
+                    <i class="bi bi-shield-shaded text-warning fs-3 flex-shrink-0"></i>
+                    <div>
+                        <strong>Core Safety Principle:</strong>
+                        <div class="text-light opacity-90 small">
+                            Flags warning signs and explains what to verify — never claims a final fraud verdict or certified company guarantee.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aggregate Quick Stats Card -->
+            <div class="col-lg-4 d-none d-lg-block">
+                <div class="p-4 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-15 backdrop-blur text-white shadow-lg">
+                    <h6 class="text-uppercase small fw-bold text-info tracking-wider mb-3">
+                        <i class="bi bi-graph-up me-1"></i> Safety Operations
+                    </h6>
+                    <div class="row g-3 text-center">
+                        <div class="col-6">
+                            <div class="p-3 rounded-3 bg-dark bg-opacity-40 border border-white border-opacity-10">
+                                <div class="fs-2 fw-bold text-white">{{ stats.total_scans }}</div>
+                                <div class="small text-white-50">Offers Scanned</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 rounded-3 bg-dark bg-opacity-40 border border-white border-opacity-10">
+                                <div class="fs-2 fw-bold text-danger">{{ stats.high_risk }}</div>
+                                <div class="small text-white-50">High-Risk Flags</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 rounded-3 bg-dark bg-opacity-40 border border-white border-opacity-10">
+                                <div class="fs-2 fw-bold text-warning">{{ stats.medium_risk }}</div>
+                                <div class="small text-white-50">Caution Advised</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 rounded-3 bg-dark bg-opacity-40 border border-white border-opacity-10">
+                                <div class="fs-2 fw-bold text-success">{{ stats.low_risk }}</div>
+                                <div class="small text-white-50">Standard Offers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <span class="small text-white-50"><i class="bi bi-mortarboard me-1"></i>Placement Cell Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4-Step Offer Assessment Workflow Bar (Directly from Slide 3) -->
+<div class="container">
+    <div class="workflow-track">
+        <div class="row g-2 align-items-center text-center text-md-start">
+            <div class="col-md-3 col-6">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <div class="step-info">
+                        <h6>SUBMIT</h6>
+                        <small>Paste text or upload PDF</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <div class="step-info">
+                        <h6>EXTRACT</h6>
+                        <small>Role, company, pay, fees</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <div class="step-info">
+                        <h6>ANALYZE</h6>
+                        <small>Rules + NLP indicators</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <div class="step-info">
+                        <h6>EXPLAIN</h6>
+                        <small>Risk level & next steps</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Scanner Workspace -->
+<section class="container my-5">
+    <div class="row g-4">
+        <!-- Input Form Column -->
+        <div class="col-lg-8">
+            <div class="custom-card shadow-sm">
+                <div class="card-header-clean d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold text-dark">
+                        <i class="bi bi-file-earmark-medical text-primary me-2"></i> Document Assessment Input
+                    </h5>
+                    <span class="badge bg-light text-secondary border">NLP + PyMuPDF Extraction</span>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Nav Tabs: Text vs PDF -->
+                    <ul class="nav nav-pills mb-4 nav-fill" id="inputTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-semibold" id="tab-text-btn" data-bs-toggle="pill" data-bs-target="#tab-text" type="button" role="tab">
+                                <i class="bi bi-textarea-t me-2"></i> Paste Job Text / Email
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-semibold" id="tab-file-btn" data-bs-toggle="pill" data-bs-target="#tab-file" type="button" role="tab">
+                                <i class="bi bi-file-earmark-pdf me-2"></i> Upload Offer Letter (PDF / TXT)
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="inputTabContent">
+                        <!-- TAB 1: PASTE TEXT -->
+                        <div class="tab-pane fade show active" id="tab-text" role="tabpanel">
+                            <form action="{{ url_for('analyze_offer') }}" method="POST" id="text-form">
+                                <input type="hidden" name="input_type" value="text">
+
+                                <div class="mb-3">
+                                    <label for="job_title_input" class="form-label small fw-bold text-secondary">
+                                        Opportunity Label / Reference (Optional)
+                                    </label>
+                                    <input type="text" class="form-control" id="job_title_input" name="job_title_input" placeholder="e.g. Apex Tech Python Internship Offer Letter">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="job_text" class="form-label small fw-bold text-secondary">
+                                        Paste Job Posting, Offer Email or WhatsApp Notification <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control font-monospace" id="job_text" name="job_text" rows="10" placeholder="Paste the complete text of the offer letter, internship description, email body, or messaging transcript here...
+e.g.
+Company: Apex Global Technologies
+Role: Data Entry Intern
+Stipend: ₹35,000/month
+Note: Selected candidates must transfer ₹1,850 refundable security deposit via UPI..."></textarea>
+                                    <div class="form-text small">
+                                        <i class="bi bi-shield-check text-success me-1"></i> Data privacy notice: Input text is evaluated immediately in-memory and not shared with third parties.
+                                    </div>
+                                </div>
+
+                                <div class="d-grid mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm py-3">
+                                        <i class="bi bi-shield-search me-2"></i> Run JobShield AI Assessment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- TAB 2: UPLOAD FILE -->
+                        <div class="tab-pane fade" id="tab-file" role="tabpanel">
+                            <form action="{{ url_for('analyze_offer') }}" method="POST" enctype="multipart/form-data" id="file-form">
+                                <input type="hidden" name="input_type" value="file">
+
+                                <div class="dropzone-container mb-3" id="file-dropzone">
+                                    <input type="file" id="document_file" name="document_file" accept=".pdf,.txt" class="d-none">
+                                    <div class="dropzone-icon">
+                                        <i class="bi bi-cloud-arrow-up-fill"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-1">Click to Upload or Drag & Drop Offer Document</h5>
+                                    <p class="text-muted small mb-2">Supports PDF Offer Letters (.pdf) and Plain Text (.txt)</p>
+                                    <span class="badge bg-light text-secondary border">Max file size: 16 MB</span>
+                                    <div id="selected-filename"></div>
+                                </div>
+
+                                <div class="alert alert-info py-2 small d-flex align-items-center">
+                                    <i class="bi bi-cpu-fill fs-5 me-2 text-info"></i>
+                                    <div>Extracted via high-performance <strong>PyMuPDF (fitz)</strong> with OCR/PyPDF fallback for complete structural text parsing.</div>
+                                </div>
+
+                                <div class="d-grid mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm py-3">
+                                        <i class="bi bi-file-earmark-check me-2"></i> Extract & Analyze PDF
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Instant Test Samples & Audience info -->
+        <div class="col-lg-4" id="samples">
+            <!-- 1-Click Demonstration Samples -->
+            <div class="custom-card mb-4 shadow-sm">
+                <div class="card-header-clean bg-light bg-opacity-50">
+                    <h6 class="mb-0 fw-bold text-dark">
+                        <i class="bi bi-lightning-fill text-warning me-1"></i> Quick Test Demonstration
+                    </h6>
+                    <small class="text-muted">Click any preset to inspect different risk profiles</small>
+                </div>
+                <div class="card-body p-3">
+                    <div class="d-flex flex-column gap-3">
+                        {% for key, s in samples.items() %}
+                        <div class="sample-pill-btn btn-load-sample" data-sample-key="{{ key }}">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="fw-bold small text-dark">{{ s.title }}</span>
+                                <i class="bi bi-arrow-right-short fs-5 text-primary"></i>
+                            </div>
+                            <p class="small text-muted mb-0 lh-sm">{{ s.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- "Who Needs It" Card from Slide 2 -->
+            <div class="custom-card shadow-sm">
+                <div class="card-header-clean">
+                    <h6 class="mb-0 fw-bold text-dark">
+                        <i class="bi bi-people-fill text-primary me-2"></i> Who Needs JobShield AI?
+                    </h6>
+                </div>
+                <div class="card-body p-3">
+                    <ul class="list-unstyled mb-0 small">
+                        <li class="d-flex align-items-start gap-2 mb-2 pb-2 border-bottom">
+                            <i class="bi bi-check2-circle text-primary fs-6 mt-1"></i>
+                            <div><strong>College Students:</strong> Evaluating internship letters received via LinkedIn, WhatsApp, or job boards.</div>
+                        </li>
+                        <li class="d-flex align-items-start gap-2 mb-2 pb-2 border-bottom">
+                            <i class="bi bi-check2-circle text-primary fs-6 mt-1"></i>
+                            <div><strong>Fresh Graduates:</strong> Checking entry-level offers with high upfront promises.</div>
+                        </li>
+                        <li class="d-flex align-items-start gap-2 mb-2 pb-2 border-bottom">
+                            <i class="bi bi-check2-circle text-primary fs-6 mt-1"></i>
+                            <div><strong>Campus Placement Cells:</strong> Screening unsolicited recruiter notifications sent to students.</div>
+                        </li>
+                        <li class="d-flex align-items-start gap-2 mb-2 pb-2 border-bottom">
+                            <i class="bi bi-check2-circle text-primary fs-6 mt-1"></i>
+                            <div><strong>Student Clubs & Mentors:</strong> Guiding peers on proper due diligence before signing contracts.</div>
+                        </li>
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-shield-lock-fill text-success fs-6 mt-1"></i>
+                            <div><strong>The Need:</strong> A quick, understandable first-check that helps students pause, investigate, and make informed choices.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Red Flag Highlights Banner -->
+<section class="bg-white py-5 border-top border-bottom">
+    <div class="container">
+        <div class="text-center mb-4">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-2">Detection Capabilities</span>
+            <h3 class="fw-bold">What JobShield AI Scans For</h3>
+            <p class="text-muted max-w-600 mx-auto">
+                Our dual Rules + NLP inspection engine cross-examines offers against the top recruitment risk vectors.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="p-3 rounded-3 border bg-light h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-cash-coin text-danger fs-4"></i>
+                        <h6 class="fw-bold mb-0">Upfront Fee Demands</h6>
+                    </div>
+                    <p class="small text-muted mb-0">
+                        Flags registration fees, training bond costs, kit deposits, and direct UPI or QR transfer instructions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="p-3 rounded-3 border bg-light h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-envelope-exclamation text-warning fs-4"></i>
+                        <h6 class="fw-bold mb-0">Unverified Contacts</h6>
+                    </div>
+                    <p class="small text-muted mb-0">
+                        Detects free webmail accounts (@gmail/@yahoo) pretending to be enterprise HR and unofficial Telegram/WhatsApp channels.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="p-3 rounded-3 border bg-light h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-stars text-info fs-4"></i>
+                        <h6 class="fw-bold mb-0">Unrealistic Promises</h6>
+                    </div>
+                    <p class="small text-muted mb-0">
+                        Identifies "Direct Selection without Interview", disproportionate pay for trivial tasks, and guaranteed payouts.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="p-3 rounded-3 border bg-light h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-hourglass-split text-primary fs-4"></i>
+                        <h6 class="fw-bold mb-0">High-Pressure Tactics</h6>
+                    </div>
+                    <p class="small text-muted mb-0">
+                        Catches artificial urgency, 24-hour expiration threats, and scarcity coercion designed to prevent second opinions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

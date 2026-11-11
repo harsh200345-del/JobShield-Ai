@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment Archive & Campus Oversight | JobShield AI{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1 text-dark">
+                <i class="bi bi-archive-fill text-primary me-2"></i> Assessment Archive & Campus Oversight
+            </h2>
+            <p class="text-muted mb-0 small">
+                Records of recruitment documents scanned by students, placement mentors, and career guidance cells.
+            </p>
+        </div>
+        <div class="mt-2 mt-md-0">
+            <a href="{{ url_for('index') }}" class="btn btn-primary rounded-pill px-4">
+                <i class="bi bi-plus-lg me-1"></i> Scan New Offer
+            </a>
+        </div>
+    </div>
+
+    <!-- Campus Aggregate Metrics Row -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-6">
+            <div class="custom-card p-3 border-start border-4 border-primary">
+                <div class="text-muted small text-uppercase fw-bold">Total Scanned Offers</div>
+                <div class="fs-2 fw-bold text-dark">{{ stats.total_scans }}</div>
+                <div class="small text-muted">All-time assessments</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="custom-card p-3 border-start border-4 border-danger">
+                <div class="text-muted small text-uppercase fw-bold">High Risk Identified</div>
+                <div class="fs-2 fw-bold text-danger">{{ stats.high_risk }}</div>
+                <div class="small text-danger">{{ stats.high_risk_pct }}% of all scans</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="custom-card p-3 border-start border-4 border-warning">
+                <div class="text-muted small text-uppercase fw-bold">Cautionary / Medium</div>
+                <div class="fs-2 fw-bold text-warning">{{ stats.medium_risk }}</div>
+                <div class="small text-muted">Noticeable irregularities</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="custom-card p-3 border-start border-4 border-success">
+                <div class="text-muted small text-uppercase fw-bold">Average Risk Score</div>
+                <div class="fs-2 fw-bold text-success">{{ stats.avg_risk_score }} / 100</div>
+                <div class="small text-muted">Aggregate safety index</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table of Previous Scans -->
+    <div class="custom-card shadow-sm">
+        <div class="card-header-clean d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold text-dark">
+                <i class="bi bi-clock-history text-secondary me-2"></i> Recent Assessments Log
+            </h5>
+            <span class="badge bg-light text-secondary border">Latest 50 Submissions</span>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr class="small text-uppercase text-secondary">
+                            <th class="ps-4">ID</th>
+                            <th>Timestamp</th>
+                            <th>Target Opportunity</th>
+                            <th>Stated Role & Company</th>
+                            <th>Risk Score</th>
+                            <th>Risk Level</th>
+                            <th>Key Flags</th>
+                            <th class="text-end pe-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for scan in scans %}
+                        <tr>
+                            <td class="ps-4 fw-bold text-secondary">#{{ scan.id }}</td>
+                            <td class="small text-muted text-nowrap">{{ scan.timestamp }}</td>
+                            <td>
+                                <div class="fw-bold text-dark text-truncate" style="max-width: 220px;" title="{{ scan.document_name }}">
+                                    {{ scan.document_name }}
+                                </div>
+                                <span class="badge bg-light text-secondary border small text-uppercase" style="font-size: 0.65rem;">
+                                    {{ scan.input_type }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="fw-semibold text-dark text-truncate" style="max-width: 180px;">
+                                    {{ scan.role }}
+                                </div>
+                                <small class="text-muted text-truncate d-block" style="max-width: 180px;">
+                                    {{ scan.company }}
+                                </small>
+                            </td>
+                            <td>
+                                <span class="fw-bold {% if scan.risk_level == 'HIGH' %}text-danger{% elif scan.risk_level == 'MEDIUM' %}text-warning{% else %}text-success{% endif %}">
+                                    {{ scan.risk_score }} / 100
+                                </span>
+                            </td>
+                            <td>
+                                <span class="risk-badge {% if scan.risk_level == 'HIGH' %}badge-high{% elif scan.risk_level == 'MEDIUM' %}badge-medium{% else %}badge-low{% endif %} py-1 px-2 small" style="font-size: 0.75rem;">
+                                    {{ scan.risk_level }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    {% if scan.critical_count > 0 %}
+                                    <span class="badge bg-danger small" title="Critical red flags">{{ scan.critical_count }} Crit</span>
+                                    {% endif %}
+                                    {% if scan.warning_count > 0 %}
+                                    <span class="badge bg-warning text-dark small" title="Warning red flags">{{ scan.warning_count }} Warn</span>
+                                    {% endif %}
+                                    {% if scan.critical_count == 0 and scan.warning_count == 0 %}
+                                    <span class="badge bg-success small">Clean</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td class="text-end pe-4">
+                                <a href="{{ url_for('view_report', scan_id=scan.id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="bi bi-eye me-1"></i> View Report
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center py-5 text-muted">
+                                <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary opacity-50"></i>
+                                <div>No offers scanned yet.</div>
+                                <a href="{{ url_for('index') }}" class="btn btn-sm btn-primary rounded-pill mt-2">
+                                    Scan First Offer
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

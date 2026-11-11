@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Student Recruitment Safety Guide | JobShield AI{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- Hero Header -->
+    <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-2">
+            <i class="bi bi-shield-check me-1"></i> Student Awareness Toolkit
+        </span>
+        <h2 class="fw-bold text-dark mb-2">Recruitment Safety Guide & Red Flag Playbook</h2>
+        <p class="text-muted">
+            Essential knowledge for college students and fresh graduates to recognize fraudulent hiring patterns before sharing sensitive personal data or hard-earned money.
+        </p>
+    </div>
+
+    <!-- Golden Rule Box -->
+    <div class="alert alert-danger border-2 border-danger shadow-sm p-4 rounded-4 mb-5">
+        <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-exclamation-octagon-fill text-danger fs-1 flex-shrink-0"></i>
+            <div>
+                <h4 class="fw-bold text-danger mb-1">The Absolute Golden Rule of Hiring</h4>
+                <p class="mb-0 text-dark">
+                    <strong>Genuine employers pay you; they NEVER ask you to pay them.</strong> No legitimate company will ever demand a "registration fee," "training fee," "laptop security deposit," or "document verification fee" under any circumstances. Any request for money via UPI, QR code, or bank transfer is a definitive red flag.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top 5 Common Internship Traps -->
+    <h4 class="fw-bold text-dark mb-4">
+        <i class="bi bi-diagram-3-fill text-primary me-2"></i> Anatomy of Top 5 Recruitment Traps
+    </h4>
+
+    <div class="row g-4 mb-5">
+        <!-- Trap 1 -->
+        <div class="col-md-6">
+            <div class="custom-card p-4 h-100 border-start border-4 border-danger shadow-sm">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="fw-bold text-dark mb-0">1. The "Refundable Training Fee" Trap</h5>
+                    <span class="badge bg-danger">Critical Risk</span>
+                </div>
+                <p class="text-muted small">
+                    <strong>How it works:</strong> The applicant receives an offer letter congratulating them on selection, but is told they must pay ₹1,000 to ₹5,000 for training modules, certificates, or asset insurance, promised to be refunded with the first stipend.
+                </p>
+                <div class="p-2 px-3 rounded bg-light border small text-dark">
+                    <strong>Reality Check:</strong> Once the transfer is sent, the recruiter stops answering or demands additional "GST clearance" or "server access" fees.
+                </div>
+            </div>
+        </div>
+
+        <!-- Trap 2 -->
+        <div class="col-md-6">
+            <div class="custom-card p-4 h-100 border-start border-4 border-warning shadow-sm">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="fw-bold text-dark mb-0">2. The "Telegram / WhatsApp Recruiter"</h5>
+                    <span class="badge bg-warning text-dark">High Risk</span>
+                </div>
+                <p class="text-muted small">
+                    <strong>How it works:</strong> The recruiter claims to represent top MNCs (Amazon, Google, TCS, Flipkart) but contacts you exclusively via WhatsApp or Telegram using a generic name and a public <code>@gmail.com</code> email.
+                </p>
+                <div class="p-2 px-3 rounded bg-light border small text-dark">
+                    <strong>Reality Check:</strong> Legitimate corporations have secure applicant tracking systems (ATS) and correspond exclusively from corporate domain emails (e.g. <code>@amazon.jobs</code>).
+                </div>
+            </div>
+        </div>
+
+        <!-- Trap 3 -->
+        <div class="col-md-6">
+            <div class="custom-card p-4 h-100 border-start border-4 border-warning shadow-sm">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="fw-bold text-dark mb-0">3. Vague High-Pay Data Entry / Typing</h5>
+                    <span class="badge bg-warning text-dark">Common Trap</span>
+                </div>
+                <p class="text-muted small">
+                    <strong>How it works:</strong> Promises of ₹40,000/month for "simple copy paste" or "form filling 2 hours daily" with "zero skills required".
+                </p>
+                <div class="p-2 px-3 rounded bg-light border small text-dark">
+                    <strong>Reality Check:</strong> These operations either collect upfront "software demo charges" or enforce impossible accuracy quotas to withhold payment and demand penalty fees.
+                </div>
+            </div>
+        </div>
+
+        <!-- Trap 4 -->
+        <div class="col-md-6">
+            <div class="custom-card p-4 h-100 border-start border-4 border-info shadow-sm">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="fw-bold text-dark mb-0">4. Instant Selection Without Screening</h5>
+                    <span class="badge bg-info text-dark">Suspicious</span>
+                </div>
+                <p class="text-muted small">
+                    <strong>How it works:</strong> You receive an official-looking appointment letter within hours of submitting a resume, with no technical interview, screening test, or video call.
+                </p>
+                <div class="p-2 px-3 rounded bg-light border small text-dark">
+                    <strong>Reality Check:</strong> Genuine companies invest engineering time in interviewing candidates to gauge culture and technical competence before issuing binding offers.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practical 4-Point Due Diligence Framework -->
+    <div class="custom-card p-4 p-md-5 mb-5 shadow-sm">
+        <h4 class="fw-bold text-dark mb-3">
+            <i class="bi bi-clipboard2-check text-success me-2"></i> The JobShield 4-Point Verification Framework
+        </h4>
+        <p class="text-muted mb-4">
+            Follow these concrete steps whenever you receive an offer from an unfamiliar recruiter:
+        </p>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="border rounded-3 p-3 h-100 bg-light">
+                    <div class="fw-bold text-primary mb-1">Step 1: Check MCA / ROC</div>
+                    <p class="small text-muted mb-0">
+                        Visit <strong>mca.gov.in</strong> (Master Data) and check if the Corporate Identification Number (CIN) is active and matches the address on the letter.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="border rounded-3 p-3 h-100 bg-light">
+                    <div class="fw-bold text-primary mb-1">Step 2: Inspect Email Domain</div>
+                    <p class="small text-muted mb-0">
+                        Examine the sender's domain after the '@'. Ensure it matches the company's real website. Beware of domain spoofs (e.g. <code>@microsoft-careers.com</code> vs <code>@microsoft.com</code>).
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="border rounded-3 p-3 h-100 bg-light">
+                    <div class="fw-bold text-primary mb-1">Step 3: LinkedIn Recruiter Check</div>
+                    <p class="small text-muted mb-0">
+                        Look up the recruiter on LinkedIn. Verify their tenure, company connections, and whether they actively post company updates.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="border rounded-3 p-3 h-100 bg-light">
+                    <div class="fw-bold text-primary mb-1">Step 4: Contact Official Line</div>
+                    <p class="small text-muted mb-0">
+                        Never dial the phone number printed on a suspect offer letter. Look up the company's head office switchboard independently and ask for HR.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

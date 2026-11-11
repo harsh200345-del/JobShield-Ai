@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}About JobShield AI & Team HackNova Pitch{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- Header Section -->
+    <div class="custom-card p-4 p-md-5 mb-5 bg-dark text-white border-0 shadow-lg position-relative overflow-hidden">
+        <div class="position-relative" style="z-index: 2;">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge bg-primary px-3 py-2 text-uppercase">Hackathon Pitch Deck</span>
+                <span class="badge bg-info text-dark px-3 py-2 text-uppercase">Team HackNova</span>
+            </div>
+            <h1 class="display-5 fw-bold mb-3">JobShield <span class="text-info">AI</span></h1>
+            <h4 class="text-light fw-light mb-3">Smart Internship & Job Risk Assessment Platform</h4>
+            <p class="lead text-light text-opacity-75 max-w-700 mb-4">
+                "Flags warning signs and explains what to verify — never claims a final fraud verdict."
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-secondary p-2 px-3"><i class="bi bi-person-fill me-1"></i>Harsh Pandey</span>
+                <span class="badge bg-secondary p-2 px-3"><i class="bi bi-person-fill me-1"></i>Shivam Yadav</span>
+                <span class="badge bg-secondary p-2 px-3"><i class="bi bi-person-fill me-1"></i>Mahi Garg</span>
+                <span class="badge bg-secondary p-2 px-3"><i class="bi bi-person-fill me-1"></i>Priyanshi Bansal</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4-Step Solution Architecture (Slide 3) -->
+    <div class="row g-4 mb-5">
+        <div class="col-12">
+            <h3 class="fw-bold text-dark mb-4">
+                <i class="bi bi-cpu-fill text-primary me-2"></i> Proposed Solution: 4-Step Assessment Workflow
+            </h3>
+        </div>
+
+        <div class="col-md-3">
+            <div class="custom-card p-4 h-100 border-top border-4 border-primary shadow-sm text-center">
+                <div class="step-num mx-auto mb-3" style="width: 44px; height: 44px; font-size: 1.1rem;">01</div>
+                <h5 class="fw-bold text-dark">SUBMIT</h5>
+                <p class="small text-muted mb-0">
+                    Paste raw job text from messaging apps or upload an offer letter PDF / document.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="custom-card p-4 h-100 border-top border-4 border-info shadow-sm text-center">
+                <div class="step-num mx-auto mb-3" style="width: 44px; height: 44px; font-size: 1.1rem;">02</div>
+                <h5 class="fw-bold text-dark">EXTRACT</h5>
+                <p class="small text-muted mb-0">
+                    PyMuPDF & NLP parser read role, employer, pay/stipend, fees, domains, and contacts.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="custom-card p-4 h-100 border-top border-4 border-warning shadow-sm text-center">
+                <div class="step-num mx-auto mb-3" style="width: 44px; height: 44px; font-size: 1.1rem;">03</div>
+                <h5 class="fw-bold text-dark">ANALYZE</h5>
+                <p class="small text-muted mb-0">
+                    Dual Rules + NLP engine evaluates 5 safety vectors to identify suspicious indicators.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="custom-card p-4 h-100 border-top border-4 border-success shadow-sm text-center">
+                <div class="step-num mx-auto mb-3" style="width: 44px; height: 44px; font-size: 1.1rem;">04</div>
+                <h5 class="fw-bold text-dark">EXPLAIN</h5>
+                <p class="small text-muted mb-0">
+                    Risk score, transparent reasons, radar visualization, and actionable checklist.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Stack & Architecture (Slide 5) -->
+    <div class="custom-card p-4 p-md-5 mb-5 shadow-sm">
+        <h3 class="fw-bold text-dark mb-4">
+            <i class="bi bi-stack text-primary me-2"></i> Technology Stack & System Architecture
+        </h3>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <ul class="list-group list-group-flush small">
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-bold"><i class="bi bi-window text-primary me-2"></i>Frontend:</span>
+                        <span class="badge bg-light text-dark border">HTML5, CSS3, JavaScript, Bootstrap 5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-bold"><i class="bi bi-server text-info me-2"></i>Backend:</span>
+                        <span class="badge bg-light text-dark border">Python 3 + Flask Application Framework</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-bold"><i class="bi bi-robot text-danger me-2"></i>AI / NLP:</span>
+                        <span class="badge bg-light text-dark border">Rule-Based Risk Engine + NLP Heuristics / LLM API</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-bold"><i class="bi bi-file-earmark-pdf text-danger me-2"></i>Documents:</span>
+                        <span class="badge bg-light text-dark border">PyMuPDF (fitz) + PyPDF fallback</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-bold"><i class="bi bi-database text-warning me-2"></i>Database:</span>
+                        <span class="badge bg-light text-dark border">SQLite (jobshield.db)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-bold"><i class="bi bi-pie-chart text-success me-2"></i>Visualization:</span>
+                        <span class="badge bg-light text-dark border">Chart.js (Radar & Score Gauges)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-4 rounded-3 bg-light border h-100">
+                    <h6 class="fw-bold text-dark mb-2">High-Level Data Flow</h6>
+                    <div class="small font-monospace bg-white p-3 rounded border text-secondary mb-3">
+                        USER INPUT (PDF / Pasted text)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                        FLASK BACKEND (Input validation & PyMuPDF extract)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                        ANALYSIS ENGINE (5-Category Rules + NLP reasoner)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                        RESULTS PAGE (Risk indicators, radar & checklist)
+                    </div>
+                    <div class="small text-muted">
+                        <i class="bi bi-lock-fill text-success me-1"></i>
+                        <strong>MVP Privacy Principle:</strong> Process documents in-memory for risk analysis and avoid retaining personal candidate data unless needed and consented to.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact & Responsible Use (Slide 6) -->
+    <div class="row g-4 mb-5">
+        <div class="col-12">
+            <h3 class="fw-bold text-dark mb-3">
+                <i class="bi bi-shield-shaded text-primary me-2"></i> Impact & Responsible AI Principles
+            </h3>
+        </div>
+
+        <div class="col-md-4">
+            <div class="custom-card p-4 h-100 border-start border-4 border-success shadow-sm">
+                <h5 class="fw-bold text-dark">Student Awareness</h5>
+                <p class="small text-muted mb-0">
+                    Helps applicants notice warning signs before sharing money or sensitive documentation like Aadhaar, PAN, or bank credentials.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="custom-card p-4 h-100 border-start border-4 border-primary shadow-sm">
+                <h5 class="fw-bold text-dark">Transparent Explainability</h5>
+                <p class="small text-muted mb-0">
+                    Explains the specific text evidence that triggered each warning rather than giving an unexplained, opaque score label.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="custom-card p-4 h-100 border-start border-4 border-info shadow-sm">
+                <h5 class="fw-bold text-dark">Campus Adoption</h5>
+                <p class="small text-muted mb-0">
+                    Can be integrated into college placement cells, WhatsApp career groups, and student guidance clubs to protect entire batches.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Roadmap (Slide 6) -->
+    <div class="custom-card p-4 p-md-5 mb-4 shadow-sm">
+        <h4 class="fw-bold text-dark mb-4">
+            <i class="bi bi-signpost-split text-primary me-2"></i> Strategic Product Roadmap
+        </h4>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <span class="badge bg-success mb-2">Phase 1: MVP (Complete)</span>
+                    <h6 class="fw-bold text-dark">Input, Extraction & Warning Engine</h6>
+                    <p class="small text-muted mb-0">
+                        Text paste, PyMuPDF PDF extraction, 5-vector rule engine, Chart.js radar visualization, and SQLite history database.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <span class="badge bg-primary mb-2">Phase 2: BETA (Active)</span>
+                    <h6 class="fw-bold text-dark">AI Explanations & Report Archive</h6>
+                    <p class="small text-muted mb-0">
+                        Contextual NLP explanations, student feedback loop, pre-loaded benchmark test suites, and interactive checklist persistence.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <span class="badge bg-info text-dark mb-2">Phase 3: Campus Pilot</span>
+                    <h6 class="fw-bold text-dark">Placement-Cell Rollout</h6>
+                    <p class="small text-muted mb-0">
+                        Live MCA company database API lookups, placement cell supervisor alerts, and university-wide recruiter whitelisting.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

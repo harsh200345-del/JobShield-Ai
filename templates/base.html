@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}JobShield AI | Smart Internship & Job Risk Assessment{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body {% block body_attrs %}{% endblock %}>
+
+    <!-- Top Team HackNova Announcement Bar -->
+    <div class="bg-dark text-white-50 py-1 px-3 d-flex justify-content-between align-items-center small border-bottom border-secondary border-opacity-25 no-print">
+        <div>
+            <span class="badge bg-primary text-uppercase me-2">Hackathon Project</span>
+            <strong>Team HackNova:</strong> Harsh Pandey • Shivam Yadav • Mahi Garg • Priyanshi Bansal
+        </div>
+        <div class="d-none d-md-block text-end">
+            <span class="text-light opacity-75"><i class="bi bi-shield-check text-success me-1"></i>AI-Powered Recruitment Safety</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top no-print">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ url_for('index') }}">
+                <i class="bi bi-shield-lock-fill text-primary fs-3 me-2"></i>
+                <span class="text-white">JobShield</span>
+                <span class="text-info ms-1">AI</span>
+                <span class="brand-badge">Assessment</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active fw-semibold text-white{% endif %}" href="{{ url_for('index') }}">
+                            <i class="bi bi-search me-1"></i> Verify Offer
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/history' %}active fw-semibold text-white{% endif %}" href="{{ url_for('history') }}">
+                            <i class="bi bi-clock-history me-1"></i> Scan Archive
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/guide' %}active fw-semibold text-white{% endif %}" href="{{ url_for('guide') }}">
+                            <i class="bi bi-book me-1"></i> Safety Guide
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/about' %}active fw-semibold text-white{% endif %}" href="{{ url_for('about') }}">
+                            <i class="bi bi-info-circle me-1"></i> About & Pitch
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-sm btn-outline-info rounded-pill px-3" href="{{ url_for('index') }}#samples">
+                            <i class="bi bi-lightning-charge me-1"></i> Try Demo Samples
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Flash Messages -->
+        <div class="container mt-3">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2 fs-5"></i>
+                            <div>{{ message }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="no-print">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-5">
+                    <h5 class="text-white d-flex align-items-center mb-3">
+                        <i class="bi bi-shield-lock-fill text-primary me-2"></i> JobShield AI
+                    </h5>
+                    <p class="small text-secondary mb-3">
+                        Smart Internship & Job Risk Assessment. Empowers students, graduates, and placement cells to pause, inspect warning signs, and verify offers before sharing sensitive data or money.
+                    </p>
+                    <div class="p-2 px-3 rounded bg-dark border border-secondary border-opacity-25 small text-light">
+                        <i class="bi bi-info-circle text-info me-1"></i>
+                        <strong>Responsible AI Principle:</strong> JobShield flags warning signs and explains what to verify — never claims a final fraud verdict or certified guarantee.
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white text-uppercase small fw-bold mb-3">Quick Navigation</h6>
+                    <ul class="list-unstyled small text-secondary">
+                        <li class="mb-2"><a href="{{ url_for('index') }}" class="text-decoration-none text-secondary hover-white">Scan Job / Offer Letter</a></li>
+                        <li class="mb-2"><a href="{{ url_for('history') }}" class="text-decoration-none text-secondary hover-white">Campus Placement History</a></li>
+                        <li class="mb-2"><a href="{{ url_for('guide') }}" class="text-decoration-none text-secondary hover-white">Student Safety Guide</a></li>
+                        <li class="mb-2"><a href="{{ url_for('about') }}" class="text-decoration-none text-secondary hover-white">HackNova Pitch & Architecture</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="text-white text-uppercase small fw-bold mb-3">Hackathon Team HackNova</h6>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <span class="badge bg-secondary text-light">Harsh Pandey</span>
+                        <span class="badge bg-secondary text-light">Shivam Yadav</span>
+                        <span class="badge bg-secondary text-light">Mahi Garg</span>
+                        <span class="badge bg-secondary text-light">Priyanshi Bansal</span>
+                    </div>
+                    <p class="small text-muted mb-0">
+                        Built for student awareness, campus career placement portals, and recruitment transparency.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="border-secondary border-opacity-25 my-3">
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-secondary">
+                <div>© 2026 JobShield AI • Developed by Team HackNova.</div>
+                <div>Document text processed locally; zero persistent personal data retention.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

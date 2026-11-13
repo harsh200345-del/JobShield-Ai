@@ -41,7 +41,9 @@ def extract_text_from_pdf(file_path: str) -> Tuple[str, Dict[str, Any]]:
         "producer": "",
         "title": "",
         "creation_date": "",
-        "extractor_used": "none"
+        "extractor_used": "none",
+        "has_images": False,
+        "image_count": 0
     }
 
     # Primary extractor: PyMuPDF (fitz)
@@ -57,9 +59,17 @@ def extract_text_from_pdf(file_path: str) -> Tuple[str, Dict[str, Any]]:
             metadata["extractor_used"] = "PyMuPDF"
 
             page_texts = []
+            img_count = 0
             for page_num in range(len(doc)):
                 page = doc.load_page(page_num)
                 page_texts.append(page.get_text())
+                try:
+                    img_count += len(page.get_images())
+                except Exception:
+                    pass
+
+            metadata["image_count"] = img_count
+            metadata["has_images"] = img_count > 0
 
             text = "\n".join(page_texts)
             doc.close()

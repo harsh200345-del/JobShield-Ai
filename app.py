@@ -99,7 +99,10 @@ def analyze_offer():
             doc_name = "Pasted Job / Offer Notice"
 
     if not extracted_text or len(extracted_text) < 20:
-        flash("The document content is too brief to analyze. Please provide a more complete job post or offer letter.", "warning")
+        if input_type == "file" and metadata.get("pages", 0) > 0 and metadata.get("has_images", False):
+            flash("This PDF appears to be a scanned image or photo without selectable text. Please copy & paste the offer letter text into the 'Paste Job Text' tab, or upload a text-based PDF.", "warning")
+        else:
+            flash("The document content is too brief to analyze. Please provide a more complete job post or offer letter.", "warning")
         return redirect(url_for("index"))
 
     # Perform analysis
